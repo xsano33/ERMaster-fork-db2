@@ -2,7 +2,7 @@
 <feature
       id="org.insightech.er.feature"
       label="ERMaster-fork-db2"
-      version="1.0.1"
+      version="1.0.2"
       provider-name="Insightech.org"
       plugin="org.insightech.er">
 

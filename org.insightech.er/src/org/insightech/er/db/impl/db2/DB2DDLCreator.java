@@ -50,11 +50,6 @@ public class DB2DDLCreator extends DDLCreator {
 			}
 		}
 
-		// sano custom - CLOB is always 100M
-		if (normalColumn.getType().getId().equals("clob")){
-			ddl.append(" (100M) ");
-		}
-
 		return ddl.toString();
 	}
 
