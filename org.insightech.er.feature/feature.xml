@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.insightech.er.feature"
-      label="ERMaster"
-      version="1.0.0.v20131215-0930"
+      label="ERMaster-fork-db2"
+      version="1.0.1"
       provider-name="Insightech.org"
       plugin="org.insightech.er">
 
@@ -48,7 +48,7 @@ limitations under the License.
    </license>
 
    <url>
-      <update label="ERMaster" url="http://downloads.sourceforge.net/project/ermaster/ermaster"/>
+      <update label="ERMaster-fork-db2" url="https://github.com/xsano33/ERmaster-fork-db2"/>
    </url>
 
    <requires>

@@ -3,7 +3,10 @@ package org.insightech.er.db.impl.db2;
 import org.insightech.er.db.impl.db2.tablespace.DB2TablespaceProperties;
 import org.insightech.er.editor.model.ERDiagram;
 import org.insightech.er.editor.model.dbexport.ddl.DDLCreator;
+import org.insightech.er.editor.model.diagram_contents.element.node.table.ERTable;
 import org.insightech.er.editor.model.diagram_contents.element.node.table.column.NormalColumn;
+import org.insightech.er.editor.model.diagram_contents.element.node.table.properties.TableProperties;
+import org.insightech.er.editor.model.diagram_contents.element.node.table.properties.TableViewProperties;
 import org.insightech.er.editor.model.diagram_contents.not_element.sequence.Sequence;
 import org.insightech.er.editor.model.diagram_contents.not_element.tablespace.Tablespace;
 import org.insightech.er.util.Check;
@@ -45,6 +48,11 @@ public class DB2DDLCreator extends DDLCreator {
 
 				ddl.append(")");
 			}
+		}
+
+		// sano custom - CLOB is always 100M
+		if (normalColumn.getType().getId().equals("clob")){
+			ddl.append(" (100M) ");
 		}
 
 		return ddl.toString();
@@ -162,6 +170,31 @@ public class DB2DDLCreator extends DDLCreator {
 
 		return ddl.toString();
 
+	}
+
+	//override TABLESPACE CLAUSE for IN
+	@Override
+	public String getPostDDL(ERTable table) {
+		TableViewProperties commonTableProperties = (TableViewProperties) this
+				.getDiagram().getDiagramContents().getSettings()
+				.getTableViewProperties();
+
+		TableProperties tableProperties = (TableProperties) table
+				.getTableViewProperties();
+
+		Tablespace tableSpace = tableProperties.getTableSpace();
+		if (tableSpace == null) {
+			tableSpace = commonTableProperties.getTableSpace();
+		}
+
+		StringBuilder postDDL = new StringBuilder();
+
+		if (tableSpace != null) {
+			postDDL.append(" IN ");
+			postDDL.append(tableSpace.getName());
+		}
+
+		return postDDL.toString();
 	}
 
 }

@@ -72,17 +72,25 @@ public class Index extends AbstractModel implements ObjectModel,
 		this.descs.add(desc);
 	}
 
+	// to modify bug index generation - sano
+	public void removeColumn(){
+		this.columns.clear();
+	}
+	public void removeDesc(){
+		this.descs.clear();
+	}
+
 	public List<NormalColumn> getColumns() {
 		List<NormalColumn> list = new ArrayList<NormalColumn>();
 
 		for (int i=0; i<this.columns.size(); i++) {
 			NormalColumn column = this.columns.get(i);
-			
+
 			if (this.table.getNormalColumns().contains(column)) {
 				list.add(column);
 			}
 		}
-		
+
 		return list;
 	}
 
@@ -95,12 +103,12 @@ public class Index extends AbstractModel implements ObjectModel,
 
 		for (int i=0; i<this.columns.size(); i++) {
 			NormalColumn column = this.columns.get(i);
-			
+
 			if (this.table.getNormalColumns().contains(column)) {
 				list.add(this.columnNames.get(i));
 			}
 		}
-		
+
 		return list;
 	}
 
@@ -114,12 +122,12 @@ public class Index extends AbstractModel implements ObjectModel,
 
 		for (int i=0; i<this.columns.size(); i++) {
 			NormalColumn column = this.columns.get(i);
-			
+
 			if (this.table.getNormalColumns().contains(column)) {
 				list.add(this.descs.get(i));
 			}
 		}
-		
+
 		return list;
 	}
 
@@ -181,7 +189,7 @@ public class Index extends AbstractModel implements ObjectModel,
 
 	/**
 	 * description ���擾���܂�.
-	 * 
+	 *
 	 * @return description
 	 */
 	public String getDescription() {
@@ -190,7 +198,7 @@ public class Index extends AbstractModel implements ObjectModel,
 
 	/**
 	 * description ��ݒ肵�܂�.
-	 * 
+	 *
 	 * @param description
 	 *            description
 	 */
